@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<style>
+	.big_bg1{
+    	width: 510px;
+    	height: 276px;
+    	float: left;
+   	    position: relative;
+    }
+	.bg{
+		width: 510px;
+		height: 276px;
+		opacity: 0;
+		position: absolute;
+		top: 0;
+		left: 0;
+		transition: all .28s ease-in .1s;
+	}
+	.big_bg1 .current_bg{
+		opacity: 1;
+		transition: all .28s ease-in .1s;
+	}
+	.big_bg1 .left_icon{
+		position: absolute;
+		opacity: 0;
+		left: 0;
+		top:80px;
+		width: 45px;
+		height: 100px;
+		background: url("btn.png");
+	}
+	.big_bg1 .left_icon:hover{
+		opacity: 1;
+	}
+	.big_bg1 .right_icon{
+		position: absolute;
+		opacity: 0;
+		right: 0;
+		top:80px;
+		width: 45px;
+		height: 100px;
+		background: url("btn.png");
+		background-position-x: 50px;
+	}
+	.big_bg1 .right_icon:hover{
+		opacity: 1;
+	}
+	.big_bg1 .list_ball{
+    	position: absolute;
+    	width: 260px;
+    	height: 25px;
+    	bottom: 10px;
+    	left: 0;
+    }
+    .big_bg1 .list_ball .bg_ball{
+    	background-color: rgb(68,68,68);
+    	height: 25px;
+    	line-height: 25px;
+    	width: 25px;
+    	border-radius:12.5px ;
+   	 	text-align: center;
+   	 	margin-left: 10px;	
+   		color: #fff;
+    	z-index: 1000;
+    	float: left;
+    }
+     .big_bg1 .list_ball .currentball{
+     	background-color: orange;
+     }
+	</style>
+</head>
+<body>
+	<div class="big_bg1">
+		<div class="bg current_bg" style="background: url('1.jpg');"></div>
+		<div class="bg" style="background: url('2.jpg')"></div>
+		<div class="bg" style="background: url('3.jpg')"></div>
+		<div class="bg" style="background: url('4.jpg')"></div>
+		<div class="bg" style="background: url('5.jpg')"></div>
+		<div class="bg" style="background: url('6.jpg')"></div>
+		<div class="bg" style="background: url('7.jpg')"></div>
+
+		<div class="left_icon"></div>
+		<div class="right_icon"></div>
+        <div class="list_ball">
+            <div class="bg_ball currentball">1</div>
+            <div class="bg_ball">2</div>
+            <div class="bg_ball">3</div>
+            <div class="bg_ball">4</div>
+            <div class="bg_ball">5</div>
+            <div class="bg_ball">6</div>
+            <div class="bg_ball">7</div>
+        </div>
+    </div>
+	<script type="application/javascript">
+	    window.onload=function(){
+			var left_icon=document.getElementsByClassName('left_icon')[0];
+			var right_icon=document.getElementsByClassName('right_icon')[0];
+	    	var bg_ball=document.getElementsByClassName('bg_ball');
+			var bg=document.getElementsByClassName('bg');
+	    	var currentindex=0;
+			var newIndex;
+			//每个小球点击时，变颜色，换对应下标图片,这里不加动画效果
+			for(let i=0;i<bg.length;i++){
+        		bg_ball[i].onclick=function(){
+					if(currentindex!=i){
+						bg_ball[i].classList.add('currentball');
+						bg_ball[currentindex].classList.remove('currentball');
+                        bg[i].classList.add('current_bg');
+						bg[currentindex].classList.remove('current_bg');
+						currentindex=i;
+					}
+        		}
+			}
+			left_icon.onclick=function () {
+				if(currentindex==0){
+					newIndex=bg.length-1;
+				}else{
+					newIndex=currentindex-1;
+				}
+				bg_ball[newIndex].classList.add('currentball');
+				bg_ball[currentindex].classList.remove('currentball');
+				bg[newIndex].classList.add('current_bg');
+				bg[currentindex].classList.remove('current_bg');
+				currentindex=newIndex;
+			}
+			function goHead(){
+				if(currentindex==(bg.length-1)){
+					newIndex=0;
+				}else{
+					newIndex=currentindex+1;
+				}
+				bg_ball[newIndex].classList.add('currentball');
+				bg_ball[currentindex].classList.remove('currentball');
+				bg[newIndex].classList.add('current_bg');
+				bg[currentindex].classList.remove('current_bg');
+				currentindex=newIndex;
+			}
+			window.setInterval(function () {
+				goHead();
+			},3000);
+			right_icon.onclick=function () {
+				goHead();
+			}
+
+
+
+	    }
+		
+	</script>
+</body>
+</html>
