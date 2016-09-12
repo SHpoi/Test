@@ -1,0 +1,132 @@
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type">
+	<title>Document</title>
+	<style type="text/css">
+		div{
+			height: 300px;
+			width: 600px;
+			border: 1px  solid  gray;
+			margin: 0 auto;
+
+		}
+		span{
+			font-size: 10px;
+
+		}
+	</style>
+	<script type="text/javascript" src="jquery.min.js">  	
+	</script>
+	<script type="text/javascript">
+		$(function(){
+			var username=$('input[name=username]');
+		    username.bind('blur click keyup',testUserName);
+		    function testUserName(){
+                  var re= /^[a-zA-Z]\w{5,17}$/gi.test($(this).val());
+                  var span=$(this).parent().next().children('span');          
+                  if($(this).val()==''){    	
+                  	  span.text('用户名不能为空！！').css('color','red');
+                  }else if($(this).val().length<6||$(this).val().length>17){
+                      span.text('用户名长度不能小于6位或大于17位').css('color','red');
+                  }else if(!re){
+                  	  span.text('请输入正确格式：以字母开头，长度在6~18之间，只能包含字符、数字和下划线').css('color','red'); 
+                  }else{ 
+                  	  span.text('输入正确').css('color','green');
+                  	  return true;
+                  }                    
+		    }
+
+		    var pass=$('input[name=pass]');
+		    pass.bind('mouseout',function(){
+		    	confirmpass.click();
+		    });
+		    pass.bind('blur click keyup',testPass);
+		    function testPass(){
+                  var re= /^[a-zA-Z]\w{5,17}$/gi.test($(this).val());
+                  var span=$(this).parent().next().children('span');
+                  // console.log($(this).val());
+                  // console.log(re);          
+                  if($(this).val()==''){    	
+                  	  span.text('密码不能为空！！').css('color','red');
+                  }else if($(this).val().length<6||$(this).val().length>17){
+                      span.text('密码长度不能小于6位或大于17位').css('color','red');
+                  }else if(!re){
+                  	  span.text('请输入正确格式：以字母开头，长度在6~18之间，只能包含字符、数字和下划线').css('color','red'); 
+                  }else{ 
+                  	  span.text('输入正确').css('color','green'); 
+                  	  return true;
+                  }
+                 
+		    }
+		    var confirmpass=$('input[name=confirmpass]');
+		    confirmpass.bind('blur click keyup',testConfirm);
+		    function testConfirm(){       
+                  var span=$(this).parent().next().children('span');
+                   console.log($(this).val())
+                  if($(this).val()!=pass.val()&&$(this).val()!=''){  	
+                  	  span.text('请再次确认密码！').css('color','red');
+                  }else if($(this).val()==''){
+                  	  span.text('确认密码不能为空！').css('color','red');
+                  }else{ 
+                  	  span.text('输入正确').css('color','green');
+                  	  return true;
+                  }                              
+		    }
+
+		    var email=$('input[name=email]');
+		    email.bind('blur click keyup',testEmail);
+		    function testEmail(){
+		    	  var span=$(this).parent().next().children('span');   
+				  var re= /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/gi.test($(this).val());          
+                  if(email.val()==''){    	
+                  	 span.text('邮箱不能为空！！').css('color','red');
+                  }else if(!re){
+                  	 span.text('请填入正确的邮箱格式').css('color','red');  	
+                  }else{
+                  	 span.text('邮箱正确').css('color','green');              	
+                  	 return true;
+                  }
+                              
+		    }
+		    var submit=$('input[type=submit]');
+            submit.click(function(event){        	
+            	if(testEmail.call(email)&&testConfirm.call(confirmpass)&&
+            		testUserName.call(username)&&testPass.call(pass)){
+            		alert('输入正确')
+            	}else{
+            		alert('输入错误')
+            	}
+				 return false;
+		    });
+		})
+	</script>
+</head>
+<body>
+<div>
+     
+	 <form  method="post">
+	 	 <table>
+	 	 <tr><td colspan="2"><h1>注册功能</h1></td></tr>
+	 	 <tr>
+	 	 <td>用户名：</td><td><input type="text" name="username"/></td>
+	 	 <td><span></span></td>
+	 	 </tr>
+	 	 <tr>
+	 	 <td>密码：</td><td><input type="password" name="pass"/></td>
+	 	 <td><span></span></td>
+	 	 </tr>
+	 	 <tr>
+	 	 <td>确认密码：</td><td><input type="password" name="confirmpass"/></td>
+	 	 <td><span></span></td>
+	 	 </tr>
+	 	 <tr>
+	 	 <td>邮箱：</td><td><input type="text" name="email"/></td>
+	 	 <td><span></span></td>
+	 	 </tr>
+	 	 <tr><td colspan="2" style='text-align: center'><input type="submit" name="按钮"></td></tr>
+	 	 </table>
+	 </form>
+	 </div>
+</body>
+</html>
