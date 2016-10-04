@@ -1,0 +1,36 @@
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+<input type="file" id="test">
+
+</body>
+<script>
+    window.onload = function () {
+        var test = document.getElementById("test");
+        test.onchange = function () {
+            onread(this);
+        }
+        function onread(sender) {
+            //            this.value.match(/\.jpg|\.png|\.gif/) &&  alert("是图片");            //this指向test  \.转义符
+            if (sender.value.match(/\.jpg|\.png|\.gif/)) {
+
+                var file = sender.files[0].name;
+
+                var filesrc = window.URL.createObjectURL(sender.files[0]);//手册上该属性没有
+
+                document.body.style.background = "url(" + filesrc + ") no-repeat";
+
+
+            } else {
+                sender.value = "";
+                alert("bu是图片");
+                return false;
+            }
+        }
+    };
+
+
+</script>
+</html>

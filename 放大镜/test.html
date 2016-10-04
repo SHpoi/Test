@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>放大镜</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        #demo {
+            display: block;
+            width: 400px;
+            height: 255px;
+            margin: 50px;
+            position: relative;
+            border: 1px solid #ccc;
+        }
+
+        #small-box {
+            position: relative;
+            z-index: 1;
+        }
+
+        #float-box {
+            display: none;
+            width: 160px;
+            height: 120px;
+            position: absolute;
+            background: #ffffcc;
+            border: 1px solid #ccc;
+            filter: alpha(opacity=50);
+            opacity: 0.5;
+        }
+
+        #mark {
+            position: absolute;
+            display: block;
+            width: 400px;
+            height: 255px;
+            background-color: #fff;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            z-index: 10;
+        }
+
+        #big-box {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 460px;
+            width: 400px;
+            height: 300px;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            z-index: 1;;
+        }
+
+        #big-box img {
+            position: absolute;
+            z-index: 5
+        }
+    </style>
+    <script>
+        window.onload=function () {
+//            document.getElementById("mark").onmouseover=function () {
+//                alert(1);
+//            };这种样子麻痹一定要放在onload里面才能加载事件
+
+                var a=new big();
+                a.init().overleave().move();
+
+            }
+        function big(){
+            this.smalljpg="macbook-small.jpg";
+            this.bigjpg="macbook-big.jpg";
+            this.objSmallBox=document.getElementById("small-box");
+            this.objBigBox=document.getElementById("big-box");
+            this.objFloatBox=document.getElementById("float-box");
+            this.objDemo = document.getElementById("demo");
+            this.objMark = document.getElementById("mark");
+
+        }
+        big.prototype.init=function () {
+            document.getElementById("smalljpg").src=this.smalljpg;
+            document.getElementById("bigjpg").src=this.bigjpg;
+            return this;
+        };
+        big.prototype.overleave=function () {
+            var me=this.objBigBox;
+            var float=this.objFloatBox;
+            this.objMark.onmouseover=function () {
+                me.style.display="block";
+                float.style.display="block";
+            };
+            this.objMark.onmouseout=function () {
+                me.style.display="none";
+                float.style.display="none";
+            };
+            return this;
+        };
+        big.prototype.move=function () {
+            var smallbox=this.objSmallBox;
+            var floatbox=this.objFloatBox;
+            var bigbox=this.objBigBox;
+            var demo=this.objDemo;
+            var mark=this.objMark;
+            var objBigBoxImage = document.getElementById("bigjpg");
+            this.objMark.onmousemove=function (ev) {
+
+                var _event = ev || window.event;  //兼容多个浏览器的event参数模式
+                //获取鼠标指针在当前小图片上的坐标
+                var left = _event.clientX - demo.offsetLeft - smallbox.offsetLeft - floatbox.offsetWidth / 2;
+                var top = _event.clientY - demo.offsetTop - smallbox.offsetTop - floatbox.offsetHeight / 2;
+//                console.log("left:"+left+" top:"+top)
+                if (left < 0) {
+                    left = 0;
+                } else if (left > (mark.offsetWidth - floatbox.offsetWidth)) {
+                    left = mark.offsetWidth - floatbox.offsetWidth;
+                }
+
+                if (top < 0) {
+                    top = 0;
+                } else if (top > (mark.offsetHeight - floatbox.offsetHeight)) {
+                    top = mark.offsetHeight - floatbox.offsetHeight;
+
+                }
+                //让floatbox随鼠标移动
+                floatbox.style.left = left + "px";   //oSmall.offsetLeft的值是相对什么而言
+                floatbox.style.top = top + "px";
+                //精粹
+                var percentX = left / (mark.offsetWidth - floatbox.offsetWidth);
+                var percentY = top / (mark.offsetHeight - floatbox.offsetHeight);
+                objBigBoxImage.style.left = -percentX * (objBigBoxImage.offsetWidth - bigbox.offsetWidth) + "px";
+                objBigBoxImage.style.top = -percentY * (objBigBoxImage.offsetHeight - bigbox.offsetHeight) + "px";
+
+                console.log(objBigBoxImage.style.left)
+            }
+        };
+
+
+
+
+    </script>
+</head>
+<body>
+<div id="demo">
+    <div id="small-box">
+        <div id="mark"></div>
+        <div id="float-box"></div>
+        <img id="smalljpg"/>
+    </div>
+    <div id="big-box">
+        <img id="bigjpg"/>
+    </div>
+</div>
+</body>
+</html>
