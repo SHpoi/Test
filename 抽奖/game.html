@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="jquery-3.0.0.min.js"></script>
+    <style type="text/css">
+      html,body{
+      	width: 100%;
+      	height:100%;
+      	margin: 0;
+      	padding: 0;
+        background: grey;
+        text-align: center;
+      }
+      table{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -434px;
+        margin-top: -250px;
+      }
+      table tr td{
+        font-size: 0;
+       /* 上下居然变成0了,使用font-size：0 来去掉inline-block元素之间的空隙方法*/
+       
+      }
+      table tr td img{
+        padding: 1px;
+          filter:alpha(opacity=50);  -moz-opacity:0.5;  -khtml-opacity: 0.5;  opacity: 0.5;
+      }
+      table tr td.center{
+          position: relative; 
+      }
+      table tr td.center div{
+          position: absolute; 
+          width: 100%;
+          bottom: 40%;
+      }
+      table tr td.center div button{
+          border: none;
+          color: #fff;
+          width: 150px;
+          height: 40px;
+          margin-left:10px; 
+          background-color: #6a2613;
+          cursor: pointer;
+      }
+      table tr td.center div button:hover{
+        background-color: #481305;
+      }
+      #target{
+          padding: 1px;
+          filter:alpha(opacity=100);  -moz-opacity:1;  -khtml-opacity: 1;  opacity: 1;
+      }
+    </style>
+</head>
+<body>
+   <table  cellpadding="0" cellspacing="0"><!-- 清除表格见缝隙 -->
+     <tr>
+       <td>
+         <img src="img/1.jpg">
+       </td>
+       <td>
+         <img src="img/2.jpg">
+       </td>
+       <td>
+         <img src="img/3.jpg">
+       </td>
+       <td>
+         <img src="img/4.jpg">
+       </td>
+       <td>
+         <img src="img/5.jpg">
+       </td>
+       <td>
+         <img src="img/6.jpg">
+       </td>
+       <td>
+         <img src="img/7.jpg">
+       </td>
+     </tr>
+     <!-- 1 -->
+     <tr>
+       <td>
+         <img src="img/20.jpg">
+       </td>
+       <td class="center" colspan="5" rowspan="3">
+      <!--  列合并5个，行合并三个 -->  
+            
+            <img src="img/center.jpg" >
+            <div>
+            <button id="start">开始抽奖</button>
+            <button id="reset">重置</button>
+            </div>
+       </td>
+       <td>
+         <img src="img/8.jpg">
+       </td>
+     </tr>
+
+     <tr>
+       <td>
+         <img src="img/19.jpg">
+       </td>       
+       <td>
+         <img src="img/9.jpg">
+       </td>       
+     </tr>
+
+     <tr>
+       <td>
+         <img src="img/18.jpg">
+       </td>      
+       <td>
+         <img src="img/10.jpg">
+       </td>       
+     </tr>
+
+     <tr>
+       <td>
+         <img src="img/17.jpg">
+       </td>
+       <td>
+         <img src="img/16.jpg">
+       </td>
+       <td>
+         <img src="img/15.jpg">
+       </td>
+       <td>
+         <img src="img/14.jpg">
+       </td>
+       <td>
+         <img src="img/13.jpg">
+       </td>
+       <td>
+         <img src="img/12.jpg">
+       </td>
+       <td>
+         <img src="img/11.jpg">
+       </td>
+     </tr>  
+     <!--<div id="target"></div>-->
+   </table>
+   <script type="text/javascript">
+     curr=0;
+    $(function(){
+
+          move(0);
+          $("#start").click(function(event) {
+
+              animation(curr,Math.ceil(Math.random()*30+50));
+
+          });
+          $("#reset").click(function(event) {
+              if(curr!==0){
+                  changeSrcBack(curr+1);
+                  move(0);
+                  curr=0;
+              }
+
+
+          });
+    })
+
+       function animation(index,count) {
+           setTimeout(function(){//我操，setinterval会卡死，用timeout
+
+              curr= move(++index%20);
+               if(--count>0)
+                   animation(index,count);
+           },80);
+
+
+       }
+       function move(index) {
+           $('img[src="img/'+(index+1)+'.jpg"]').css({"filter":"alpha(opacity=100)",  "-moz-opacity":"1", "-khtml-opacity": "1", "opacity": "1"});
+           if(index===0){
+               changeSrcBack(20);
+           }else{
+               changeSrcBack(index);
+           }
+
+
+           return index;
+       }
+       function changeSrcBack(index){
+         $('img[src="img/'+index+'.jpg"]').css({"filter":"alpha(opacity=50)",  "-moz-opacity":"0.5", "-khtml-opacity": "0.5", "opacity": "0.5"});
+       }
+
+   </script>
+</body>
+</html>
