@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QQ邮箱</title>
+</head>
+<style>
+    *,body,html,ul,li,p{
+        padding: 0;margin: 0;
+    }
+    a{text-decoration: none}
+    .wrap{
+        width: 800px;
+        height: 475px;
+
+        margin: 50px auto;
+        padding: 20px;
+    }
+    .top{
+        width: 100%;
+        height: 50px;
+    }
+    .middle{
+        width: 100%;
+        /*background-color: #ff7269;*/
+        height: 360px;
+        margin-top: 10px;
+    }
+    .bottom{
+        width: 100%;
+
+        margin-top: 10px;
+        height: 50px;
+        text-align: center;
+    }
+    .bottom .bg {
+        width: 100%;
+        height: 20px;
+        background-color: rgb(234,243,255);
+    }
+    .bottom .bg a{
+        color: rgb(0,94,178);
+        margin: 0px 3px;
+        font-size: 12px;
+    }
+    .bottom p{
+        margin-top: 5px;
+        color: grey;
+        font-size: 16px;
+    }
+    .top_left_icon{
+        width: 185px;
+        height: 50px;
+        background: url("logo.gif") no-repeat;
+        background-size: cover;
+        float: left;
+        /*background-color: #fff;*/
+    }
+    .top_right_nav{
+        float: right;
+        text-align: right;
+        font-size: 14px;
+        color: rgb(0,94,178);
+        height: 40px;
+        line-height: 40px;
+        width: 610px;
+        border-radius: 0 8px 8px 0;
+        background-color: rgb(234,243,255);
+        margin-top: 10px;
+    }
+    .top_right_nav a{
+        margin: 0 3px;
+    }
+    .middle .middle_left{
+        float: left;
+        width: 400px;
+        height: 360px;
+        /*background-color: #00b3ee;*/
+
+    }
+    .middle .middle_right{
+        float: right;
+        width: 358px;
+        height: 318px;
+        background-color: rgb(237,245,255);
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid rgb(22, 130, 207);
+    }
+    .middle .middle_right h3{
+        margin-bottom: 5px;
+    }
+    .middle .middle_right input[type='text']{
+        display: inline-block;
+        height: 30px;
+        border-radius: 5px;
+        color:grey;
+        border: 2px solid grey;
+        border-bottom: 0;
+        border-right: 0;
+        margin-top: 15px;
+    }
+    .middle .middle_right input[type='text']:nth-child(2){
+       width: 200px;
+        margin-right: 0;
+    }
+    .middle .middle_right input[type='text']:nth-child(3){
+        width: 100px;
+        margin-left: 0;
+    }
+    .middle .middle_right input[type='text']:nth-child(5){
+        width: 310px;
+    }
+    .middle .middle_right input[type='button']{
+        display: block;
+        width: 80px;
+        background-color: rgb(122,175,18);
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 5px;
+        border: 1px solid rgb(85,133,10);
+        margin: 15px 0;
+        color: #fff;
+        height:30px ;
+    }
+
+    .middle .middle_right form p{
+        color: rgb(0,94,178);
+        font-weight: 300;
+    }
+    .middle .middle_right .right_bottom_message{
+        width: 358px;
+        height: 60px;
+        margin-top: 30px;
+
+
+    }
+    .middle .middle_right .right_bottom_message span{
+        position: static;
+        font-size: 14px;
+    }
+    .middle .middle_right .right_bottom_message span:nth-child(1),.middle .middle_right .right_bottom_message span:nth-child(4){
+        font-size: 12px;
+        color: #b9bbcc;
+    }
+    /*有问题*/
+
+
+    .middle .middle_right .message{
+        width: 318px;
+        position: relative;
+        padding-top: 15px;
+        font-size: 12px;
+        line-height: 12px;
+    }
+    .middle .middle_right input[type='checkbox']{
+        vertical-align: middle;
+    }
+    .middle .middle_right span{
+        position: absolute;
+        right: 0;
+        color:  rgb(0,94,178); ;
+    }
+
+    .middle .middle_right h3{
+
+        color: rgb(3,88,207);
+    }
+    .middle .middle_left .middle_left_top{
+        width: 380px;
+        height: 220px;
+        margin: 10px;
+        /*background-color: #faff7e;*/
+        padding-top: 10px;
+
+    }
+    .middle .middle_left .middle_left_top .content_bg{
+        width: 155px;
+        height: 205px;
+        margin: 0 15px 15px 15px;
+        float: left;
+        background: url("biaozhi.gif") no-repeat center;
+        background-size: cover;
+
+    }
+    .middle .middle_left .middle_left_top .content{
+        width: 180px;
+        height: 205px;
+        margin: 0 15px 15px 0px;
+        float: right;
+
+
+
+    }
+    .middle .middle_left .middle_left_top .content h3{
+        margin: 10px 0;
+        color: rgb(3,88,207);
+    }
+    .middle .middle_left .middle_left_top .content ul{
+        list-style: none;
+    }
+    .middle .middle_left .middle_left_top .content ul li{
+       line-height: 1.5;
+        font-size: 16px;
+    }
+    .middle .middle_left .middle_left_top .content ul li:last-child{
+        margin-top:10px;
+        font-size: 8px;
+    }
+
+    .middle .middle_left .middle_left_bottom{
+        width: 380px;
+        height: 70px;
+        margin: 10px;
+        /*background-color: #faff7e;*/
+        margin-top: 30px;
+        color: rgb(152,134,171);
+        font-size: 11px;
+        line-height: 1.5;
+
+    }
+    .middle .middle_left .middle_left_bottom ul {
+        list-style-position: inside;
+        margin-left: 15px;
+    }
+</style>
+<body>
+<div class="wrap">
+    <div class="top">
+        <div class="top_left_icon"></div>
+        <div class="top_right_nav">
+<a>English</a>|<a>反馈建议</a>|<a>帮助中心</a>|<a>企业邮箱</a>
+        </div>
+    </div>
+    <div class="middle">
+        <div class="middle_left">
+            <div class="middle_left_top">
+                <div class="content_bg"></div>
+                <div class="content">
+                    <h3>QQ邮箱，常联系！</h3>
+                    <ul>
+                        <li>到头来，</li>
+                        <li>我们记住的</li>
+                        <li>不是敌人的攻击，</li>
+                        <li>而是朋友的沉默。</li>
+                        <li>————马丁*路*德金</li>
+                        <li>插画来自丑丑（2岁）</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="middle_left_bottom">
+                <ul>
+                    <li>您可以用您的QQ号和QQ密码直接登录邮箱</li>
+                    <li>您还可以注册一个邮箱账号（例如：chen@qq.com）并以此登录</li>
+                    <li>手机访问mail.qq.com或使用手机客户端也可以发送邮件</li>
+                </ul>
+            </div>
+        </div>
+        <div class="middle_right">
+            <form action="#" >
+                <h3>登录QQ邮箱</h3>
+                <input type="text" value="邮箱账号或密码"/>  <input type="text" value="@qq.com"/><br/>
+                <input type="text" value="QQ密码"/><br/>
+                <div class="message">
+                <input type="checkbox">记住登录状态
+                <span>忘记密码？</span>
+                </div>
+                <input type="button" value="登录"/>
+                <p>切换到快速登录</p>
+            </form>
+            <div class="right_bottom_message">
+
+            <span>还没有QQ邮箱？</span><span>立即注册</span><br/>
+            <span>网速太慢？</span><span>使用基本版本</span>
+            </div>
+        </div>
+    </div>
+    <div class="bottom">
+        <div class="bg">
+            <a>关于腾讯</a>|<a>服务条款</a>|<a>客服中心</a>|<a>联系我们</a>
+        </div>
+
+        <p>1998-Tencent publish.All.Reserved</p>
+    </div>
+</div>
+</body>
+</html>
