@@ -1,0 +1,88 @@
+/*居中嵌套可用line-height*/
+* {margin:0；padding:0;font-size: 12px}
+body{background-color: #F5F5F5}
+.top{width:100%;height:27px;background:url(images/top_bg.jpg) repeat-x;}/*水平重复*/
+.top_content{width:1000px;margin:0 auto;}
+.top_content li{list-style: url(images/li_bg.gif);float:right;width:70px;line-height: 27px}
+.top_content a:link,.top_content a:visited{color: #8E8E8E;text-decoration: none;cursor: pointer;}/*链接与链接被访问状态*/
+.top_content a:hover,.top_content a:active{color:#900;text-decoration: none}/*active 鼠标点击的状态。*/
+.wrap{width:1000px;margin: 0 auto}
+.logo{width: 100%;overflow: hidden;background-color: #fff;}
+.logo_left{width:200px;float: left;}
+.logo_right{width: 300px;float: right;height:28px;margin-top:30px;color: #8e8e8e}
+.logo_right img{vertical-align: middle;margin-right: 10px}/*vertical-align 属性设置元素的垂直对齐方式*/
+.tel{font-family: "微软雅黑"；font-size:16px;color:#c00;}
+.nav {height: 40px;clear: both;}
+.nav_left {width:10px;background: url(images/nav_left.jpg) no-repeat;}
+.nav_mid {width:980px;background: url(images/nav_bg.jpg) repeat-x;line-height: 40px}
+.nav_right {width:10px;background: url(images/nav_right.jpg) no-repeat;}
+.nav_left, .nav_mid, .nav_right {height:40px;float:left;}
+.nav_left, .nav_mid, .nav_right {height: 40px;float:left;display: inline;}
+.nav_left, .nav_mid, .nav_right {height: 40px;float: left;display: inline;
+}
+
+.nav_mid a:link, .nav_mid a:visited {font-size: 16px;color: #FFF;text-decoration: none;}
+.nav_mid a:hover, .nav_mid a:active {font-size: 16px;color: #FF0;text-decoration: none;}
+.nav_mid_left {width: 680px;}
+.nav_mid_right {width: 300px;}
+.nav_mid_left, .nav_mid_right {float: left;display: inline;height: 40px;}
+.nav_mid_left ul{margin: 0 ;padding: 0}
+.nav_mid_left li{margin:0;padding:0;float:left;list-style-type:none;width:100px;text-align:center;height: 40px}
+.search_text {width: 190px;float: left;height: 25px;margin-top: 5px;background: url(images/search.jpg) no-repeat right center;background-color: #FFF;border: 1px solid #FFF;padding-right: 25px;outline: none;}
+.ad{height: 340px;overflow: hidden;}
+.main{height: 250px;background-color: #fff;margin-top: 5px}
+.news{width: 340px;border: 1px solid #e8e8e8;}
+.title{height: 35px;border-bottom: 2px solid #e8e8e8}
+.title_left{width: 60%;font-family: "微软雅黑";font-size: 14px;font-weight: bold;color:#786f66;float: left;line-height: 35px;padding-left: 25px;margin: 0px}
+.title_right{width: 20%;float: right;line-height: 35px;text-align: right;padding-right:13px;}
+.title_right a{text-decoration:none;color: #999999}
+.pic_news{height:80px;margin-top:10px;line-height:22px;}
+.pic_news h2{margin: 0px}
+.pic_news img,.course_pic img{float: left;margin: 0 5px}
+.pic_news a,.course_pic a{color: #C00;text-decoration: none;}
+.news_list{margin-top:20px;}
+.news_list ul{margin: 0;padding: 0;}/**兼容性问题,不取消默认样式，ul下面会有padding*/
+.news_list li {background: url(images/list.jpg) no-repeat;list-style-type:none;padding-left: 10px;margin: 8px;border-bottom: 1px dotted #CCC;height: 17px;line-height: 17px;}
+.news_list a:link,.news_list a:visited{text-decoration: none;color: #000}
+.news_list a:hover,.news_list a:active{text-decoration: none;color: #f00}
+.news_list ul li span{color: #999;float: right}
+.course{width: 410px;border: 1px solid #e8e8e8;margin:0 7px;}
+.course_pic{height: 120px;margin-top: 10px;line-height: 22px}
+.course_pic h2,.course_pic p{margin: 0px}
+.course_type{height: 37px;width: 372px;background: url(images/product_type_bg.jpg) no-repeat;margin: 20px auto}
+.course_type ul{padding: 0;margin: 0}
+.course_type li{list-style-type: none;float: left;line-height: 37px;margin: 0 15px;text-align: center}
+.sidebar{width: 232px}
+.video{height: 185px;border: 1px solid #e8e8e8;}
+.video_content{height: 150px}
+.sidebar_ad{height: 55px;border:1px solid #e8e8e8;margin-top: 10px}
+.news,.course,.sidebar{float: left;height: 250px}
+.copyright{width: 100%;height: 200px;background-color: #e8e8e8;margin-top: 8px;clear:both;}
+.copyright_content{width:1000px;height: 180px;margin: 0 auto;padding-top: 20px}
+.copyright_content ul{margin: 0;padding: 0;}
+.copyright_content li{list-style-type:none;float:right;width:200px;background: url(images/line.png) no-repeat right center;text-align: center;line-height: 30px;font-family: "微软雅黑";}
+.copyright_content ul li{font-size: 18px}
+.copyright_content ul li ul li{font-size: 14px}
+.list_main{min-height: 350px;_height: 350px;background-color: #fff;margin-top: 10px}
+.news_type{width: 220px;height: 350px;border: 1px solid #e8e8e8;float: left}
+.list_box{width: 770px;
+	min-height: 350px;
+	_height:350px;/*ie6会识别，因为min-height这种最小高度的写法在ie6不兼容*/
+	border: 1px solid #e8e8e8;float: right;background-color: #fff}
+.news_type h2{margin: 0;height: 35px;line-height: 35px;font-size: 14px;font-family:"微软雅黑";color:#666;
+background:url(images/title_bg.gif) repeat-x left center;/*url 不重复 水平靠左 垂直居中*/
+padding-left: 20px}
+.news_type_content{height: 365px;background:url(images/content_bg.gif) repeat-x;}
+.news_type_content ul{margin: 0;padding: 0}
+.news_type_content ul li{list-style-type: none;height: 30px;line-height: 30px;}
+.news_type_content ul li a{color: #666;text-decoration: none;background:url(images/li_bg.gif) no-repeat left center;padding-left: 15px;
+display: block;}/*将li内敛元素转变为块元素，这样hover时的background-color会占领整个块，不然只有a标签的文字范围*/
+.news_type_content ul li a:hover{color:#009CDF;background:url(images/li_bg2.gif) no-repeat left center;background-color: #f2f2f2}
+.list_box h2{margin:0;font-size: 14px;font-family: "微软雅黑";color:#666;height: 35px;line-height: 35px;background: url(type_bg.png) repeat-x;padding-left: 20px}
+.page{margin-top: 20px;text-align: center;height: 40px;}
+.page a{display:inline-block;border: 1px solid #e8e8e8;text-decoration: none;margin:5px;padding: 5px 10px}
+.page a:hover,.page a:active{color: #fff;background-color: #cc1b1b}
+.list_box h1{font-family:"微软雅黑";font-size:20px;text-align: center;}
+.list_box_newsInfo{color:#666;text-align:center;border-bottom:1px dotted #666;}
+.list_box_newsContent{font-size: 14px;line-height: 25px;padding: 20px;
+	text-indent: 2em}/*首行缩进2em， em相对单位，当前对象文本中字符尺寸*/
