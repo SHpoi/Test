@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>bing search</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" charset="utf-8">
+	<script type="text/javascript" src="jquery-1.11.3.min.js"></script> 
+	<style type="text/css">
+	*{padding: 0px;
+	  margin:0px;
+	}
+	  body{
+		background-image: url(02.jpg) ;
+	   }
+	.logo{
+		background-image: url(logo.png);width: 107px;height: 53px;float: left;
+	}
+	form{
+		float: left;	
+		padding: 5px;
+		margin-top: 8px;
+	}
+	.search-form{float: left;}
+    .search-input-text{
+    	float: left;
+    	height: 29px;
+    	line-height: 29px; /*这个属性能让搜索框内文字垂直居中*/
+        border: 0;
+        outline: none;/*选中无边线*/
+        width: 250px;
+    }
+    .search-input-submit{
+    	float: left;
+    	border: 0;
+    	background-image:url(search-button.png);width: 29px;height:29px;
+    }
+    .search-box{
+        position: absolute;
+        top: 175px;
+        right: 170px;
+        float: right;
+    }
+    .suggest{
+    	width: 279px;
+    	background: #fff;
+    	border: 0px solid #999;
+    }
+    .suggest ul{
+    	list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+      .suggest ul li{
+      	padding: 3px;
+      	font-size: 14px;
+      	line-height: 25px;
+      	cursor: pointer;
+      }
+      .suggest ul li:hover{
+        text-decoration: underline;
+        background-color: #e5e5e5;
+      }
+	</style>
+
+
+  </head>
+  <body>
+
+ <div class="search-box">
+    <div class="logo"></div>
+    <form id="search-form" class="search-form">
+    	<input type="text" class="search-input-text" id="search-input"></input>
+        <input type="submit" class="search-input-submit" value=""></input>
+    </form>
+ </div> 
+
+ <div class="suggest" id="search-suggest" style="display: none">
+    <ul id="search-result"> 
+    <li>ddvfefdgdf</li>
+    <li>ddssddsddd</li>
+    </ul>
+ </div>
+ 
+ 
+ 
+  <script type="text/javascript">
+		
+		$('#search-input').bind(
+				'keyup',
+				function() {
+					var jqueryInput = $(this);
+					var searchText = jqueryInput.val();
+					$.ajax({
+						type : 'get',
+						crossDomain : true,
+						url : "http://api.bing.com/qsonhs.aspx?type=cb&q="
+								+ searchText,
+						dataType : 'jsonp',
+						jsonp : 'cb',
+						async : true,
+						success : function(data) {
+							var date = data.AS.Results[0].Suggests;
+							console.log(date);
+							var html = '';
+							for ( var i = 0; i < date.length; i++) {
+								html += '<li>' + date[i].Txt + '</li>';
+							}
+							$('#search-result').html(html);
+							$('#search-suggest').show()
+									.css(
+											{
+												"top" : $('#search-form')
+														.offset().top
+														+ $('#search-form')
+																.height() + 5,
+												"left" : $('#search-form')
+														.offset().left + 5,
+												position : 'absolute'
+											});
+						}
+					});
+
+				});
+        //再次点击消失
+		$(document).bind('click',function(){
+		$('#search-suggest').hide();
+		});
+        //事件代理
+		$(document).delegate('li','click',function(){
+			var keyword=$(this).text();
+               location.href='http://cn.bing.com/search?q='+keyword;
+		});
+	
+	</script>
+</body>
+</html>
