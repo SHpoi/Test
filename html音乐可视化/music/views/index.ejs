@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scable=no">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src='/javascripts/jquery.min.js'></script>
+    <!--<script src='/javascripts/main.js'></script>-->
+    <script src='/javascripts/musicVisualizer.js'></script>
+    <script src='/javascripts/index.js'></script>
+  </head>
+  <body>
+    <div class='song_list'>
+    	<ul>
+    		<% music.forEach(function(name){ %>
+    			<li title="<%=name%>"><%=name%></li>
+    		<% }) %>
+    	</ul>
+    </div>
+    <div class='play_controller'>
+    	<p>
+    		 <input id='volume' type="range" min='0' max='100'>
+    	</p>
+        <button class='previousSong'>上一首</button>
+       <!--  <button class="start">start</button> -->
+        
+        <button class='nextSong'>下一首</button>
+        <button id='colunmn'>柱状图</button>
+        <button id='circle'>点状图</button>
+        <!-- <button id='local-music-button'>本地音乐</button>
+        <input id='chose-input' type="file" style="display:none"> -->
+    </div>
+    <div class="panel">
+    </div>
+  
+  </body>
+</html>

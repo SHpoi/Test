@@ -1,0 +1,87 @@
+	function MusicVisualizer(obj){
+		this.source=null;
+		this.count=0;
+		this.analyser=MusicVisualizer.ac.createAnalyser();
+		this.size=obj.size;
+		this.analyser.fftSize=this.size*2;
+		this.gainNode=MusicVisualizer.ac[MusicVisualizer.ac.createGain?'createGain':'createGainNode']();
+		this.gainNode.connect(MusicVisualizer.ac.destination);
+		this.analyser.connect(this.gainNode);
+		this.oAjax = null;
+		if(window.XMLHttpRequest){
+		    this.oAjax = new XMLHttpRequest();
+		}else{
+		    this.oAjax = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		this.visualizer=obj.visualizer;
+		this.visualize();
+		
+	}
+	MusicVisualizer.ac = new(window.AudioContext||window.webkitAudioContext)();
+	MusicVisualizer.prototype.load=function(url,fnSucc,fnFaild){
+		var oAjax=this.oAjax;
+		//中断上一次请求,麻痹太快了
+		oAjax.abort();
+		//2.连接服务器  
+	    oAjax.open('GET', url, true);   //open(方法, url, 是否异步)
+	    oAjax.responseType='arraybuffer';
+	    //3.发送请求  
+	    oAjax.send();
+	    //4.接收返回
+	    oAjax.onreadystatechange = function(){  //OnReadyStateChange事件
+	        if(oAjax.readyState == 4){  //4为完成
+	            if(oAjax.status == 200){    //200为成功
+	                fnSucc(oAjax.response) 
+	            }else{
+	                if(fnFaild){
+	                    fnFaild();
+	                }
+	            }
+	        }
+	    };
+	}
+	MusicVisualizer.prototype.decode=function(arraybuffer,fun){
+		MusicVisualizer.ac.decodeAudioData(arraybuffer,function(buffer){
+			fun(buffer);
+		},function(error){
+    		//解码错误
+    		console.log(error)
+    	})
+	}
+	MusicVisualizer.prototype.play=function(url){
+		var n=++this.count;
+		var self=this;
+
+		this.load(url,function(arraybuffer){
+			if(n!=self.count)return;
+			self.decode(arraybuffer,function(buffer){
+				if(n!=self.count)return;
+				var bs=MusicVisualizer.ac.createBufferSource();
+				bs.connect(self.analyser);
+				bs.buffer=buffer;
+				self.source&&self.stop();
+				bs[bs.start?'start':'noteOn'](0);
+				self.source=bs;
+			})
+		});
+	}
+	MusicVisualizer.prototype.stop=function(){
+		this.source[this.source.stop?'stop':'noteOff'](0);
+	}
+	MusicVisualizer.prototype.changeVolume=function(percent){
+		this.gainNode.gain.value=percent*percent;
+	}
+	MusicVisualizer.prototype.visualize=function(){
+		var arr= new Uint8Array(this.analyser.frequencyBinCount);
+		
+		requestAnimationFrame = window.requestAnimationFrame||
+								window.webkitRequestAnimationFrame||
+								window.mozRequestAnimationFrame;
+		requestAnimationFrame(v);
+		var self=this;
+		function v(){
+			self.analyser.getByteFrequencyData(arr);
+			self.visualizer(arr);
+			requestAnimationFrame(v)
+		}
+	}

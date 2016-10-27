@@ -1,0 +1,31 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing:border-box;
+}
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+a {
+  color: #00B7FF;
+}
+ul{
+	list-style: none
+}
+.song_list{
+	background-color:lightblue; 
+}
+.song_list ul li.selected{
+	background: green;
+}
+.play_controller{
+	width: 200px;
+	height:80px;
+	background: red
+}
+.panel{
+	width: 100%;
+	height: 400px;
+}
+
