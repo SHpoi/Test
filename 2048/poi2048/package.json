@@ -4,8 +4,9 @@
   "version": "1.0.0",
   "description": "一个html制作的2048小游戏",
   "author": "孙祺雄",
-  "bugs": {"mail": "931035063@qq.com"},  
-  
-
+  "bugs": {"mail": "931035063@qq.com"},
+  "scripts": {
+    "start": "electron main.js"
+  }
 }
 
